@@ -1,9 +1,14 @@
 #include "snake.h"
 
 int main(int argc, char *argv[]) {
+    // Start input handler in its own thread
     thread input_thread(input_handler);
-    thread game_thread(game_play);   
+
+    // Run game loop (handles replay + leaderboard)
+    run_game();
+
+    // Wait for input thread before exiting
     input_thread.join();
-    game_thread.join();
-return 0;
+
+    return 0;
 }
